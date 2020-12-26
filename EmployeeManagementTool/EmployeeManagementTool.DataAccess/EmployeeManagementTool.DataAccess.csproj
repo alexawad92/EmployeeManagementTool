@@ -52,14 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmployeeManagementToolDbContext.cs" />
-    <Compile Include="Migrations\202012261711480_initialMigration.cs" />
-    <Compile Include="Migrations\202012261711480_initialMigration.designer.cs">
-      <DependentUpon>202012261711480_initialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202012261819344_initialMigration.cs" />
+    <Compile Include="Migrations\202012261819344_initialMigration.designer.cs">
+      <DependentUpon>202012261819344_initialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202012261711480_initialMigration1.Designer.cs">
+    <Compile Include="Migrations\202012261819344_initialMigration1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>202012261711480_initialMigration.resx</DependentUpon>
+      <DependentUpon>202012261819344_initialMigration.resx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,10 +75,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012261711480_initialMigration.resx">
+    <EmbeddedResource Include="Migrations\202012261819344_initialMigration.resx">
       <Generator>ResXFileCodeGeneratorEx</Generator>
-      <DependentUpon>202012261711480_initialMigration.cs</DependentUpon>
-      <LastGenOutput>202012261711480_initialMigration1.Designer.cs</LastGenOutput>
+      <DependentUpon>202012261819344_initialMigration.cs</DependentUpon>
+      <LastGenOutput>202012261819344_initialMigration1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

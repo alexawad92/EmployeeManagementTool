@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ namespace EmployeeManagementTool.DataModel
 
         public Employee()
         {
-            Teams = new List<Team>();
         }
         public int Id { get; set; }
 
@@ -27,8 +27,9 @@ namespace EmployeeManagementTool.DataModel
 
         public EmployeeType EmployeeType { get; set; }
 
+        public int? TeamId { get; set; }
 
-        public ICollection<Team> Teams { get; set; }
+        public Team Team { get; set; }
 
     }
 }

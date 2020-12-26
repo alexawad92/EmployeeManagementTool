@@ -24,7 +24,7 @@ namespace EmployeeManagementTool.DataAccess.Migrations {
     [global::System.Reflection.ObfuscationAttribute(Exclude=true, ApplyToMembers=true)]
 #endif
     [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
-    public partial class _202012261711480_initialMigration {
+    public partial class _202012261819344_initialMigration {
         
         private static global::System.Resources.ResourceManager _resourceManager;
         
@@ -33,10 +33,10 @@ namespace EmployeeManagementTool.DataAccess.Migrations {
         private static global::System.Globalization.CultureInfo _resourceCulture;
         
         /// <summary>
-        /// Initializes a 202012261711480_initialMigration object.
+        /// Initializes a 202012261819344_initialMigration object.
         /// </summary>
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public _202012261711480_initialMigration() {
+        public _202012261819344_initialMigration() {
         }
         
         /// <summary>
@@ -61,7 +61,7 @@ namespace EmployeeManagementTool.DataAccess.Migrations {
                     global::System.Threading.Monitor.Enter(InternalSyncObject);
                     try {
                         if (object.ReferenceEquals(_resourceManager, null)) {
-                            global::System.Threading.Interlocked.Exchange(ref _resourceManager, new global::System.Resources.ResourceManager("EmployeeManagementTool.DataAccess.Migrations.202012261711480_initialMigration", typeof(_202012261711480_initialMigration).Assembly));
+                            global::System.Threading.Interlocked.Exchange(ref _resourceManager, new global::System.Resources.ResourceManager("EmployeeManagementTool.DataAccess.Migrations.202012261819344_initialMigration", typeof(_202012261819344_initialMigration).Assembly));
                         }
                     }
                     finally {
