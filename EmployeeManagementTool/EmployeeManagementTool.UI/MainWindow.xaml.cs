@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using EmployeeManagementTool.ViewModels.Impls;
+
+
 namespace EmployeeManagementTool
 {
     /// <summary>
@@ -20,9 +23,18 @@ namespace EmployeeManagementTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private MainViewModel _mainViewModel;
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
+            _mainViewModel = viewModel;
+            DataContext = _mainViewModel;
+            Loaded += OnMainWindowLoaded;
+        }
+
+        private async void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            await _mainViewModel.OnLoad();
         }
     }
 }

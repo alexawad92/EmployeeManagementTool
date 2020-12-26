@@ -29,7 +29,17 @@ namespace EmployeeManagementTool.DataAccess.Migrations
                 new Team()
                 {
                     Name = "Rangers",
+
+                },
+                new Team()
+                {
+                    Name = "Galaxy Defenders",
                     
+                },
+                new Team()
+                {
+                    Name = "Einstein",
+
                 });
 
             context.SaveChanges();
@@ -45,10 +55,6 @@ namespace EmployeeManagementTool.DataAccess.Migrations
                 new Employee() {FirstName = "Jordan", LastName = "Paul", EmployeeType = EmployeeType.FunctionalManager, TeamId = context.Teams.Single(t => t.Name == "Thinkers").Id },
                 new Employee() {FirstName = "James", LastName = "Jordan", EmployeeType = EmployeeType.Tester, TeamId = context.Teams.Single(t => t.Name == "Rangers").Id },
                 new Employee() {FirstName = "Monica", LastName = "Lina", EmployeeType = EmployeeType.Tester , TeamId = context.Teams.Single(t => t.Name == "Thinkers").Id });
-
-           //=context.SaveChanges();
-
-           
         }
     }
 }
