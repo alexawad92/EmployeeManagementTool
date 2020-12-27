@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
+using EmployeeManagementTool.Events.Contracts;
 using EmployeeManagementTool.ViewModels.Contracts;
 
 
@@ -12,6 +14,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
     public class MainViewModel : ViewModelBase
     {
         private INavigationViewModel _navigationViewModel;
+        private INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
 
         public INavigationViewModel NavigationViewModel
         {
@@ -23,9 +26,16 @@ namespace EmployeeManagementTool.ViewModels.Impls
             }
 
         }
-        public MainViewModel(INavigationViewModel navigationViewModel)
+        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent)
         {
             NavigationViewModel = navigationViewModel;
+            _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
+            _navigationSelectionChangedEvent.OnSelectedNavigationItemChanged+= _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged;
+        }
+
+        private void _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged(object sender, int e)
+        {
+            MessageBox.Show($"MainViewModel got SelectedNavigationItem Changed event {e}" );
         }
 
         public async Task OnLoad()

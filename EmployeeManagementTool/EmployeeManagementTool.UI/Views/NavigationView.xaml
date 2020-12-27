@@ -6,7 +6,72 @@
              xmlns:local="clr-namespace:EmployeeManagementTool.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="NaviItemContainerStyle" TargetType="ContentPresenter">
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Margin" Value="2"></Setter>
+        </Style>
+        <DataTemplate x:Key="NaviItemTemplate">
+            <!--for every item in the list I want to show a-->
+            <Button  Command="{Binding NavigationItemClickCommand}" >
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Content" Value="{Binding DisplayMember}"></Setter>
+                                    <Setter Property="Margin" Value="4"></Setter>
+                                    <Setter Property="FontSize" Value="14"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid x:Name="grid">
+                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                                        <Setter Property="FontWeight" Value="Bold"></Setter>
+                                                        <Setter Property="Opacity" Value="1"></Setter>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter Property="FontWeight" Value="Normal"></Setter>
+                                                    </Trigger>
+
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+            <!--<Button Content="{Binding DisplayMember}" Command="{Binding NavigationItemClickCommand}" FontSize="16">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"></ContentPresenter>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                <Setter Property="Opacity" Value="0.5"></Setter>
+                            </Trigger>
+                            
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="FontWeight" Value="Normal"></Setter>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>-->
+
+           
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <ItemsControl ItemsSource="{Binding Employees}" DisplayMemberPath="FirstName"></ItemsControl>
+        <ItemsControl ItemsSource="{Binding Employees}" ItemTemplate="{StaticResource NaviItemTemplate}" ItemContainerStyle="{StaticResource NaviItemContainerStyle}"></ItemsControl>
     </Grid>
 </UserControl>

@@ -91,19 +91,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Autofac\Bootstrapper.cs" />
+    <Compile Include="Commands\Impls\ButtonCommand.cs" />
     <Compile Include="DataAccessor\Contracts\IEmployeeAccessor.cs" />
     <Compile Include="DataAccessor\Impls\EmployeeAccessor.cs" />
-    <Compile Include="ViewModels\Contracts\IEmployeeViewModel.cs" />
+    <Compile Include="Events\Contracts\INavigationSelectionChangedEvent.cs" />
+    <Compile Include="Events\Impls\NavigationSelectionChangedEvent.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />
     <Compile Include="ViewModels\Contracts\IViewModelBase.cs" />
-    <Compile Include="ViewModels\Impls\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\Impls\MainViewModel.cs" />
+    <Compile Include="ViewModels\Impls\NavigationItemViewModel.cs" />
     <Compile Include="ViewModels\Impls\NavigationViewModel.cs" />
     <Compile Include="ViewModels\Impls\ViewModelBase.cs" />
     <Compile Include="Views\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wrappers\EmployeeWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -9,6 +9,8 @@ using Autofac;
 using EmployeeManagementTool.DataAccess;
 using EmployeeManagementTool.DataAccessor.Contracts;
 using EmployeeManagementTool.DataAccessor.Impls;
+using EmployeeManagementTool.Events.Contracts;
+using EmployeeManagementTool.Events.Impls;
 using EmployeeManagementTool.ViewModels.Contracts;
 using EmployeeManagementTool.ViewModels.Impls;
 
@@ -21,7 +23,7 @@ namespace EmployeeManagementTool.Autofac
         public IContainer Boostrap()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<EmployeeViewModel>().As<IEmployeeViewModel>();
+            builder.RegisterType<NavigationSelectionChangedEvent>().As<INavigationSelectionChangedEvent>().SingleInstance();
             builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<MainWindow>().AsSelf();
