@@ -10,7 +10,6 @@ using EmployeeManagementTool.DataAccess;
 using EmployeeManagementTool.DataAccessor.Contracts;
 using EmployeeManagementTool.DataModel;
 
-
 namespace EmployeeManagementTool.DataAccessor.Impls
 {
     public class EmployeeAccessor : IEmployeeAccessor
@@ -24,6 +23,11 @@ namespace EmployeeManagementTool.DataAccessor.Impls
         public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
         {
             return await _context.Employees.ToListAsync();
+        }
+
+        public async Task<Employee> GetEmployeeByIdAsync(int id)
+        {
+            return await _context.Employees.SingleAsync(employee => employee.Id == id);
         }
     }
 }

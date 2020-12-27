@@ -12,5 +12,7 @@ namespace EmployeeManagementTool.DataAccessor.Contracts
     public interface IEmployeeAccessor
     {
         Task<IEnumerable<Employee>> GetAllEmployeesAsync();
+
+        Task<Employee> GetEmployeeByIdAsync(int id);
     }
 }

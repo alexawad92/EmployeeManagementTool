@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
+using EmployeeManagementTool.DataAccessor.Contracts;
 using EmployeeManagementTool.Events.Contracts;
 using EmployeeManagementTool.ViewModels.Contracts;
 
@@ -13,8 +14,20 @@ namespace EmployeeManagementTool.ViewModels.Impls
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly IEmployeeAccessor _employeeAccessor;
         private INavigationViewModel _navigationViewModel;
         private INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
+        private IDetailViewModel _detailViewModel;
+
+        public IDetailViewModel DetailViewModel
+        {
+            get { return _detailViewModel; }
+            set
+            {
+                _detailViewModel = value;
+                OnPropertyChanged();
+            }
+        }
 
         public INavigationViewModel NavigationViewModel
         {
@@ -26,8 +39,9 @@ namespace EmployeeManagementTool.ViewModels.Impls
             }
 
         }
-        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent)
+        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IEmployeeAccessor employeeAccessor)
         {
+            _employeeAccessor = employeeAccessor;
             NavigationViewModel = navigationViewModel;
             _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
             _navigationSelectionChangedEvent.OnSelectedNavigationItemChanged+= _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged;
@@ -35,7 +49,8 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         private void _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged(object sender, int e)
         {
-            MessageBox.Show($"MainViewModel got SelectedNavigationItem Changed event {e}" );
+            DetailViewModel = new DetailViewModel(_employeeAccessor);
+            DetailViewModel.LoadAsync(e);
         }
 
         public async Task OnLoad()

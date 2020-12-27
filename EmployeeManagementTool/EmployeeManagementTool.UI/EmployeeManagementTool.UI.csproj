@@ -96,12 +96,18 @@
     <Compile Include="DataAccessor\Impls\EmployeeAccessor.cs" />
     <Compile Include="Events\Contracts\INavigationSelectionChangedEvent.cs" />
     <Compile Include="Events\Impls\NavigationSelectionChangedEvent.cs" />
+    <Compile Include="ModelWrappers\EmployeeWrapper.cs" />
+    <Compile Include="ViewModels\Contracts\IDetailViewModel.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />
     <Compile Include="ViewModels\Contracts\IViewModelBase.cs" />
+    <Compile Include="ViewModels\Impls\DetailViewModel.cs" />
     <Compile Include="ViewModels\Impls\MainViewModel.cs" />
     <Compile Include="ViewModels\Impls\NavigationItemViewModel.cs" />
     <Compile Include="ViewModels\Impls\NavigationViewModel.cs" />
     <Compile Include="ViewModels\Impls\ViewModelBase.cs" />
+    <Compile Include="Views\DetailView.xaml.cs">
+      <DependentUpon>DetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
@@ -117,6 +123,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\DetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
