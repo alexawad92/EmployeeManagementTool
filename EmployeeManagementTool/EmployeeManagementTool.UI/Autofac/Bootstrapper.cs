@@ -24,6 +24,7 @@ namespace EmployeeManagementTool.Autofac
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<NavigationSelectionChangedEvent>().As<INavigationSelectionChangedEvent>().SingleInstance();
+            builder.RegisterType<DetailViewModelSavedEvent>().As<IDetailViewModelSavedEvent>().SingleInstance();
             builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
             //builder.RegisterType<DetailViewModel>().As<IDetailViewModel>();
             builder.RegisterType<MainViewModel>().AsSelf();

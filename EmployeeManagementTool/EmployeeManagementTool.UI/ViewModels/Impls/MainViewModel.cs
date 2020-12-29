@@ -16,7 +16,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
     {
         private readonly IEmployeeAccessor _employeeAccessor;
         private readonly IEmployeeTypeAccessor _employeeTypeAccessor;
-
+        private readonly IDetailViewModelSavedEvent _detailViewModelSavedEvent;
         private INavigationViewModel _navigationViewModel;
         private INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
         private IDetailViewModel _detailViewModel;
@@ -41,10 +41,11 @@ namespace EmployeeManagementTool.ViewModels.Impls
             }
 
         }
-        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IEmployeeAccessor employeeAccessor, IEmployeeTypeAccessor employeeTypeAccessor)
+        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IEmployeeAccessor employeeAccessor, IEmployeeTypeAccessor employeeTypeAccessor, IDetailViewModelSavedEvent detailViewModelSavedEvent)
         {
             _employeeAccessor = employeeAccessor;
             _employeeTypeAccessor = employeeTypeAccessor;
+            _detailViewModelSavedEvent = detailViewModelSavedEvent;
             NavigationViewModel = navigationViewModel;
             _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
             _navigationSelectionChangedEvent.OnSelectedNavigationItemChanged+= _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged;
@@ -52,7 +53,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         private void _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged(object sender, int e)
         {
-            DetailViewModel = new DetailViewModel(_employeeAccessor, _employeeTypeAccessor);
+            DetailViewModel = new DetailViewModel(_employeeAccessor, _employeeTypeAccessor, _detailViewModelSavedEvent);
             DetailViewModel.LoadAsync(e);
         }
 

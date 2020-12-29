@@ -16,6 +16,7 @@ namespace EmployeeManagementTool.DataAccessor.Contracts
         Task<Employee> GetEmployeeByIdAsync(int id);
 
         Task SaveChangesAsync();
+        Task ReloadEmployeeAsync(int id);
         bool HasChanges();
     }
 }

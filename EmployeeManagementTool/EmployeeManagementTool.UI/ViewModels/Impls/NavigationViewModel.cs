@@ -22,14 +22,25 @@ namespace EmployeeManagementTool.ViewModels.Impls
         private readonly IEmployeeAccessor _employeeAccessor;
 
         private readonly INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
+        private readonly IDetailViewModelSavedEvent _detailViewModelSavedEvent;
         public ObservableCollection<NavigationItemViewModel> Employees { get; set; }
 
     
-        public NavigationViewModel(IEmployeeAccessor employeeAccessor, INavigationSelectionChangedEvent navigationSelectionChangedEvent)
+        public NavigationViewModel(IEmployeeAccessor employeeAccessor, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IDetailViewModelSavedEvent detailViewModelSavedEvent)
         {
             _employeeAccessor = employeeAccessor;
             _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
+            _detailViewModelSavedEvent = detailViewModelSavedEvent;
+            _detailViewModelSavedEvent.OnDetailViewModelSaved += _detailViewModelSavedEvent_OnOnDetailViewModelSaved;
             Employees = new ObservableCollection<NavigationItemViewModel>();
+        }
+
+        private async void _detailViewModelSavedEvent_OnOnDetailViewModelSaved(object sender, int id)
+        {
+            var outdatedNavigationItemViewModel = Employees.Single(navigationItem => navigationItem.Id == id);
+            await _employeeAccessor.ReloadEmployeeAsync(id);
+            var updatedEmployee = await _employeeAccessor.GetEmployeeByIdAsync(id);
+            outdatedNavigationItemViewModel.DisplayMember = $"{updatedEmployee.FirstName} {updatedEmployee.LastName}";
         }
 
         public async Task LoadAsync()

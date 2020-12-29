@@ -11,6 +11,7 @@ using System.Windows.Input;
 using EmployeeManagementTool.Commands.Impls;
 using EmployeeManagementTool.DataAccessor.Contracts;
 using EmployeeManagementTool.DataModel;
+using EmployeeManagementTool.Events.Contracts;
 using EmployeeManagementTool.ModelWrappers;
 using EmployeeManagementTool.ViewModels.Contracts;
 
@@ -21,6 +22,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
     {
         private readonly IEmployeeAccessor _employeeAccessor;
         private readonly IEmployeeTypeAccessor _employeeTypeAccessor;
+        private readonly IDetailViewModelSavedEvent _detailViewModelSavedEvent;
         private EmployeeWrapper _employeeWrapper;
         private string _viewModelHeader;
         private bool _hasChanges;
@@ -59,9 +61,11 @@ namespace EmployeeManagementTool.ViewModels.Impls
                 OnPropertyChanged();
             }
         }
-        public DetailViewModel(IEmployeeAccessor employeeAccessor, IEmployeeTypeAccessor employeeTypeAccessor)
+        public DetailViewModel(IEmployeeAccessor employeeAccessor, IEmployeeTypeAccessor employeeTypeAccessor, IDetailViewModelSavedEvent detailViewModelSavedEvent)
         {
             _employeeAccessor = employeeAccessor;
+            _detailViewModelSavedEvent = detailViewModelSavedEvent;
+
             ViewModelHeader = "Employee Details";
             EmployeeTypes = new ObservableCollection<EmployeeTypeWrapper>();
             _employeeTypeAccessor = employeeTypeAccessor;
@@ -77,6 +81,8 @@ namespace EmployeeManagementTool.ViewModels.Impls
         {
             await _employeeAccessor.SaveChangesAsync();
             HasChanges = _employeeAccessor.HasChanges();
+            _detailViewModelSavedEvent.RaiseDetailViewModelSavedEvent(EmployeeWrapper.Id);
+            
         }
 
         public async Task LoadAsync(int id)

@@ -36,6 +36,15 @@ namespace EmployeeManagementTool.DataAccessor.Impls
             await _context.SaveChangesAsync();
         }
 
+        public async Task ReloadEmployeeAsync(int id)
+        {
+            var dbEntityEntry = _context.ChangeTracker.Entries<Employee>().SingleOrDefault(db => db.Entity.Id == id);
+            if (dbEntityEntry != null)
+            {
+                await dbEntityEntry.ReloadAsync();
+            }
+        }
+
         public bool HasChanges()
         {
             return _context.ChangeTracker.HasChanges();

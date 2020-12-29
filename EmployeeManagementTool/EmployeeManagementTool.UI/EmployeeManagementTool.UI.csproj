@@ -97,7 +97,9 @@
     <Compile Include="DataAccessor\Contracts\IEmployeeTypeAccessor.cs" />
     <Compile Include="DataAccessor\Impls\EmployeeAccessor.cs" />
     <Compile Include="DataAccessor\Impls\EmployeeTypeAccessor.cs" />
+    <Compile Include="Events\Contracts\IDetailViewModelSavedEvent.cs" />
     <Compile Include="Events\Contracts\INavigationSelectionChangedEvent.cs" />
+    <Compile Include="Events\Impls\DetailViewModelSavedEvent.cs" />
     <Compile Include="Events\Impls\NavigationSelectionChangedEvent.cs" />
     <Compile Include="ModelWrappers\EmployeeTypeWrapper.cs" />
     <Compile Include="ModelWrappers\EmployeeWrapper.cs" />
