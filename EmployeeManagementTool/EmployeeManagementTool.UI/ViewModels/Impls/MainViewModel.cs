@@ -15,6 +15,8 @@ namespace EmployeeManagementTool.ViewModels.Impls
     public class MainViewModel : ViewModelBase
     {
         private readonly IEmployeeAccessor _employeeAccessor;
+        private readonly IEmployeeTypeAccessor _employeeTypeAccessor;
+
         private INavigationViewModel _navigationViewModel;
         private INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
         private IDetailViewModel _detailViewModel;
@@ -39,9 +41,10 @@ namespace EmployeeManagementTool.ViewModels.Impls
             }
 
         }
-        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IEmployeeAccessor employeeAccessor)
+        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IEmployeeAccessor employeeAccessor, IEmployeeTypeAccessor employeeTypeAccessor)
         {
             _employeeAccessor = employeeAccessor;
+            _employeeTypeAccessor = employeeTypeAccessor;
             NavigationViewModel = navigationViewModel;
             _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
             _navigationSelectionChangedEvent.OnSelectedNavigationItemChanged+= _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged;
@@ -49,7 +52,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         private void _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged(object sender, int e)
         {
-            DetailViewModel = new DetailViewModel(_employeeAccessor);
+            DetailViewModel = new DetailViewModel(_employeeAccessor, _employeeTypeAccessor);
             DetailViewModel.LoadAsync(e);
         }
 

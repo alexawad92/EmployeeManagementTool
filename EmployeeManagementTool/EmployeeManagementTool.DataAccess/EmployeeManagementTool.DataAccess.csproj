@@ -61,6 +61,69 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>202012261819344_initialMigration.resx</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012291702380_AddedEmployeeGenderAndDoB.cs" />
+    <Compile Include="Migrations\202012291702380_AddedEmployeeGenderAndDoB.designer.cs">
+      <DependentUpon>202012291702380_AddedEmployeeGenderAndDoB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291702380_AddedEmployeeGenderAndDoB1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>202012291702380_AddedEmployeeGenderAndDoB.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291739219_AddedEmployeeTypeTable.cs" />
+    <Compile Include="Migrations\202012291739219_AddedEmployeeTypeTable.designer.cs">
+      <DependentUpon>202012291739219_AddedEmployeeTypeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291739219_AddedEmployeeTypeTable1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>202012291739219_AddedEmployeeTypeTable.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291741486_AddedTeamIdToBeMandatoryField.cs" />
+    <Compile Include="Migrations\202012291741486_AddedTeamIdToBeMandatoryField.designer.cs">
+      <DependentUpon>202012291741486_AddedTeamIdToBeMandatoryField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291741486_AddedTeamIdToBeMandatoryField1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>202012291741486_AddedTeamIdToBeMandatoryField.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291747585_AddedEmployeeTypeId.cs" />
+    <Compile Include="Migrations\202012291747585_AddedEmployeeTypeId.designer.cs">
+      <DependentUpon>202012291747585_AddedEmployeeTypeId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291747585_AddedEmployeeTypeId1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>202012291747585_AddedEmployeeTypeId.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291749476_AddedEmployeeTypeIdAndMakeItMandatory.cs" />
+    <Compile Include="Migrations\202012291749476_AddedEmployeeTypeIdAndMakeItMandatory.designer.cs">
+      <DependentUpon>202012291749476_AddedEmployeeTypeIdAndMakeItMandatory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291749476_AddedEmployeeTypeIdAndMakeItMandatory1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>202012291749476_AddedEmployeeTypeIdAndMakeItMandatory.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291812107_ChangeEmployeeTypeToBeStringNotEnum.cs" />
+    <Compile Include="Migrations\202012291812107_ChangeEmployeeTypeToBeStringNotEnum.designer.cs">
+      <DependentUpon>202012291812107_ChangeEmployeeTypeToBeStringNotEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291812107_ChangeEmployeeTypeToBeStringNotEnum1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>202012291812107_ChangeEmployeeTypeToBeStringNotEnum.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291815492_RenameToJobTitleField.cs" />
+    <Compile Include="Migrations\202012291815492_RenameToJobTitleField.designer.cs">
+      <DependentUpon>202012291815492_RenameToJobTitleField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012291815492_RenameToJobTitleField1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>202012291815492_RenameToJobTitleField.resx</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +142,41 @@
       <Generator>ResXFileCodeGeneratorEx</Generator>
       <DependentUpon>202012261819344_initialMigration.cs</DependentUpon>
       <LastGenOutput>202012261819344_initialMigration1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012291702380_AddedEmployeeGenderAndDoB.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <DependentUpon>202012291702380_AddedEmployeeGenderAndDoB.cs</DependentUpon>
+      <LastGenOutput>202012291702380_AddedEmployeeGenderAndDoB1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012291739219_AddedEmployeeTypeTable.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <DependentUpon>202012291739219_AddedEmployeeTypeTable.cs</DependentUpon>
+      <LastGenOutput>202012291739219_AddedEmployeeTypeTable1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012291741486_AddedTeamIdToBeMandatoryField.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <DependentUpon>202012291741486_AddedTeamIdToBeMandatoryField.cs</DependentUpon>
+      <LastGenOutput>202012291741486_AddedTeamIdToBeMandatoryField1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012291747585_AddedEmployeeTypeId.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <DependentUpon>202012291747585_AddedEmployeeTypeId.cs</DependentUpon>
+      <LastGenOutput>202012291747585_AddedEmployeeTypeId1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012291749476_AddedEmployeeTypeIdAndMakeItMandatory.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <DependentUpon>202012291749476_AddedEmployeeTypeIdAndMakeItMandatory.cs</DependentUpon>
+      <LastGenOutput>202012291749476_AddedEmployeeTypeIdAndMakeItMandatory1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012291812107_ChangeEmployeeTypeToBeStringNotEnum.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <DependentUpon>202012291812107_ChangeEmployeeTypeToBeStringNotEnum.cs</DependentUpon>
+      <LastGenOutput>202012291812107_ChangeEmployeeTypeToBeStringNotEnum1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012291815492_RenameToJobTitleField.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <DependentUpon>202012291815492_RenameToJobTitleField.cs</DependentUpon>
+      <LastGenOutput>202012291815492_RenameToJobTitleField1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

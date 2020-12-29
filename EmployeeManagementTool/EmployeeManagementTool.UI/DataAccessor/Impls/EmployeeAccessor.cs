@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 using EmployeeManagementTool.DataAccess;
 using EmployeeManagementTool.DataAccessor.Contracts;
@@ -27,7 +28,17 @@ namespace EmployeeManagementTool.DataAccessor.Impls
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            return await _context.Employees.SingleAsync(employee => employee.Id == id);
+            return await _context.Employees.Include(e=>e.EmployeeType).SingleAsync(employee => employee.Id == id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public bool HasChanges()
+        {
+            return _context.ChangeTracker.HasChanges();
         }
     }
 }

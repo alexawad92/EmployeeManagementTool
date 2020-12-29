@@ -30,16 +30,24 @@ namespace EmployeeManagementTool.Commands.Impls
         {
             return _canExecuteFunc.Invoke();
         }
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
 
         public void Execute(object parameter)
         {
             _executeAction.Invoke(parameter);
         }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void RaiseCanExecuteChanged()
+        {
+            OnCanExecuteChanged();
+        }
+
+        private void OnCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         #endregion
     }
 }

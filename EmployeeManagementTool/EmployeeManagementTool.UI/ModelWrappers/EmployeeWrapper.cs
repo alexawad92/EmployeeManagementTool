@@ -40,12 +40,32 @@ namespace EmployeeManagementTool.ModelWrappers
             }
         }
 
-        public EmployeeType EmployeeType
+        public int EmployeeTypeId
         {
-            get => _employee.EmployeeType;
+            get => _employee.EmployeeTypeId;
             set
             {
-                _employee.EmployeeType = value;
+                _employee.EmployeeTypeId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get => _employee.DateOfBirth;
+            set
+            {
+                _employee.DateOfBirth = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Gender Gender
+        {
+            get => _employee.Gender;
+            set
+            {
+                _employee.Gender = value;
                 OnPropertyChanged();
             }
         }

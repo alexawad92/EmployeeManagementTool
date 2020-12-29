@@ -9,13 +9,9 @@ using EmployeeManagementTool.DataModel;
 
 namespace EmployeeManagementTool.DataAccessor.Contracts
 {
-    public interface IEmployeeAccessor
+    public interface IEmployeeTypeAccessor
     {
-        Task<IEnumerable<Employee>> GetAllEmployeesAsync();
+        Task<IEnumerable<EmployeeType>> GetAllEmployeeTypesAsync();
 
-        Task<Employee> GetEmployeeByIdAsync(int id);
-
-        Task SaveChangesAsync();
-        bool HasChanges();
     }
 }

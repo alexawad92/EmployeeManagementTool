@@ -92,10 +92,14 @@
     </ApplicationDefinition>
     <Compile Include="Autofac\Bootstrapper.cs" />
     <Compile Include="Commands\Impls\ButtonCommand.cs" />
+    <Compile Include="Converters\EnumBooleanConverter.cs" />
     <Compile Include="DataAccessor\Contracts\IEmployeeAccessor.cs" />
+    <Compile Include="DataAccessor\Contracts\IEmployeeTypeAccessor.cs" />
     <Compile Include="DataAccessor\Impls\EmployeeAccessor.cs" />
+    <Compile Include="DataAccessor\Impls\EmployeeTypeAccessor.cs" />
     <Compile Include="Events\Contracts\INavigationSelectionChangedEvent.cs" />
     <Compile Include="Events\Impls\NavigationSelectionChangedEvent.cs" />
+    <Compile Include="ModelWrappers\EmployeeTypeWrapper.cs" />
     <Compile Include="ModelWrappers\EmployeeWrapper.cs" />
     <Compile Include="ViewModels\Contracts\IDetailViewModel.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />

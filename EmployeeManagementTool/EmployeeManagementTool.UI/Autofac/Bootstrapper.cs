@@ -30,6 +30,7 @@ namespace EmployeeManagementTool.Autofac
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<EmployeeManagementToolDbContext>().AsSelf();
             builder.RegisterType<EmployeeAccessor>().As<IEmployeeAccessor>();
+            builder.RegisterType<EmployeeTypeAccessor>().As<IEmployeeTypeAccessor>();
             return builder.Build();
         }
     }

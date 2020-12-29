@@ -24,12 +24,17 @@ namespace EmployeeManagementTool.DataModel
         [MaxLength(50)]
         public string LastName { get; set; }
 
+        public int EmployeeTypeId { get; set; }
 
         public EmployeeType EmployeeType { get; set; }
 
-        public int? TeamId { get; set; }
+        public int TeamId { get; set; }
 
         public Team Team { get; set; }
+
+        public DateTime DateOfBirth{ get; set; }
+
+        public Gender Gender { get; set; }
 
     }
 }

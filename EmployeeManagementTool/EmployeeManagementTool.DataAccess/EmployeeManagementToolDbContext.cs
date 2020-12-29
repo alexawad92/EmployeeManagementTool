@@ -21,6 +21,7 @@ namespace EmployeeManagementTool.DataAccess
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Team> Teams { get; set; }
 
+        public DbSet<EmployeeType> EmployeeTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
