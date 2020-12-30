@@ -72,6 +72,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -93,29 +94,59 @@
     <Compile Include="Autofac\Bootstrapper.cs" />
     <Compile Include="Commands\Impls\ButtonCommand.cs" />
     <Compile Include="Converters\EnumBooleanConverter.cs" />
+    <Compile Include="DataAccessor\Contracts\IDatabaseRepository.cs" />
+    <Compile Include="DataAccessor\Contracts\IDataLookupRepository.cs" />
+    <Compile Include="DataAccessor\Contracts\IEmployeeDataLookupRepository.cs" />
     <Compile Include="DataAccessor\Contracts\IEmployeeAccessor.cs" />
     <Compile Include="DataAccessor\Contracts\IEmployeeTypeAccessor.cs" />
+    <Compile Include="DataAccessor\Contracts\ITeamAccessor.cs" />
+    <Compile Include="DataAccessor\Contracts\ITeamDataLookupRepository.cs" />
+    <Compile Include="DataAccessor\Impls\DatabaseRepository.cs" />
+    <Compile Include="DataAccessor\Impls\TeamDataLookupRepository.cs" />
     <Compile Include="DataAccessor\Impls\EmployeeAccessor.cs" />
     <Compile Include="DataAccessor\Impls\EmployeeTypeAccessor.cs" />
+    <Compile Include="DataAccessor\Impls\EmployeeDataLookupRepository.cs" />
+    <Compile Include="DataAccessor\Impls\TeamAccessor.cs" />
     <Compile Include="Events\Contracts\IDetailViewModelSavedEvent.cs" />
+    <Compile Include="Events\Contracts\IManagementViewModelSelectionChangedEvent.cs" />
     <Compile Include="Events\Contracts\INavigationSelectionChangedEvent.cs" />
     <Compile Include="Events\Impls\DetailViewModelSavedEvent.cs" />
+    <Compile Include="Events\Impls\ManagementViewModelSelectionChangedEvent.cs" />
     <Compile Include="Events\Impls\NavigationSelectionChangedEvent.cs" />
     <Compile Include="ModelWrappers\EmployeeTypeWrapper.cs" />
     <Compile Include="ModelWrappers\EmployeeWrapper.cs" />
+    <Compile Include="ModelWrappers\TeamWrapper.cs" />
     <Compile Include="ViewModels\Contracts\IDetailViewModel.cs" />
+    <Compile Include="ViewModels\Contracts\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />
     <Compile Include="ViewModels\Contracts\IViewModelBase.cs" />
-    <Compile Include="ViewModels\Impls\DetailViewModel.cs" />
+    <Compile Include="ViewModels\Impls\EmployeeDetailViewModel.cs" />
+    <Compile Include="ViewModels\Impls\EmployeeManagementViewModel.cs" />
+    <Compile Include="ViewModels\Impls\HomeViewModel.cs" />
     <Compile Include="ViewModels\Impls\MainViewModel.cs" />
+    <Compile Include="ViewModels\Impls\ManagementViewModelBase.cs" />
     <Compile Include="ViewModels\Impls\NavigationItemViewModel.cs" />
     <Compile Include="ViewModels\Impls\NavigationViewModel.cs" />
+    <Compile Include="ViewModels\Impls\TeamDetailViewModel.cs" />
+    <Compile Include="ViewModels\Impls\TeamManagementViewModel.cs" />
     <Compile Include="ViewModels\Impls\ViewModelBase.cs" />
-    <Compile Include="Views\DetailView.xaml.cs">
-      <DependentUpon>DetailView.xaml</DependentUpon>
+    <Compile Include="Views\EmployeeDetailView.xaml.cs">
+      <DependentUpon>EmployeeDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeManagementView.xaml.cs">
+      <DependentUpon>EmployeeManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TeamDetailView.xaml.cs">
+      <DependentUpon>TeamDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TeamManagementView.xaml.cs">
+      <DependentUpon>TeamManagementView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -129,11 +160,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\DetailView.xaml">
+    <Page Include="Views\EmployeeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TeamManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

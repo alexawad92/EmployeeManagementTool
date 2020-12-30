@@ -28,9 +28,7 @@ namespace EmployeeManagementTool.DataModel
 
         public EmployeeType EmployeeType { get; set; }
 
-        public int TeamId { get; set; }
-
-        public Team Team { get; set; }
+        public int? TeamId { get; set; }
 
         public DateTime DateOfBirth{ get; set; }
 

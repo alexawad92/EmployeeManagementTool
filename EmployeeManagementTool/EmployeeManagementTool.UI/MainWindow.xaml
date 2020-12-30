@@ -7,20 +7,21 @@
         xmlns:view="clr-namespace:EmployeeManagementTool.Views"
         xmlns:viewmodel="clr-namespace:EmployeeManagementTool.ViewModels.Impls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:contracts="clr-namespace:EmployeeManagementTool.Converters"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Title="MainWindow" Height="700" Width="1200">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewmodel:DetailViewModel}">
-            <view:DetailView/>
+        <DataTemplate DataType="{x:Type viewmodel:HomeViewModel}">
+            <view:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:EmployeeManagementViewModel}">
+            <view:EmployeeManagementView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:TeamManagementViewModel}">
+            <view:TeamManagementView/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
-        <view:NavigationView Grid.Column="0" DataContext="{Binding NavigationViewModel}"></view:NavigationView>
-        <ContentControl Grid.Column="1" Content="{Binding DetailViewModel}"></ContentControl>
+        <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
     </Grid>
 </Window>

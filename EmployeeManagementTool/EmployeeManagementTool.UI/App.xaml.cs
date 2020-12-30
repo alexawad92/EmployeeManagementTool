@@ -22,7 +22,7 @@ namespace EmployeeManagementTool
         private void OnApplicationStartup(object sender, StartupEventArgs e)
         {
             var bootstrapper = new Bootstrapper();
-            var container = bootstrapper.Boostrap();
+            var container = bootstrapper.Bootstrap();
             MainWindow mainWindow = container.Resolve<MainWindow>();
             mainWindow.Show();
         }

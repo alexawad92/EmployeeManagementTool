@@ -32,9 +32,9 @@ namespace EmployeeManagementTool
             Loaded += OnMainWindowLoaded;
         }
 
-        private async void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+        private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
-            await _mainViewModel.OnLoad();
+            _mainViewModel.Load();
         }
     }
 }

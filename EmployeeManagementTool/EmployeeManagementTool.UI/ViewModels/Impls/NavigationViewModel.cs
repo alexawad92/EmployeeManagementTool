@@ -17,41 +17,49 @@ using EmployeeManagementTool.ViewModels.Contracts;
 
 namespace EmployeeManagementTool.ViewModels.Impls
 {
+    /// <summary>
+    ///     Represents the navigation panel on the left side
+    /// </summary>
     public class NavigationViewModel : ViewModelBase, INavigationViewModel
     {
-        private readonly IEmployeeAccessor _employeeAccessor;
-
+        private readonly IDataLookupRepository _dataLookupRepository;
         private readonly INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
         private readonly IDetailViewModelSavedEvent _detailViewModelSavedEvent;
-        public ObservableCollection<NavigationItemViewModel> Employees { get; set; }
-
+        public ObservableCollection<NavigationItemViewModel> NavigationItemViewModels { get; set; }
     
-        public NavigationViewModel(IEmployeeAccessor employeeAccessor, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IDetailViewModelSavedEvent detailViewModelSavedEvent)
+        public NavigationViewModel(IDataLookupRepository dataLookupRepository, 
+                                   INavigationSelectionChangedEvent navigationSelectionChangedEvent, 
+                                   IDetailViewModelSavedEvent detailViewModelSavedEvent)
         {
-            _employeeAccessor = employeeAccessor;
+            _dataLookupRepository = dataLookupRepository;
             _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
             _detailViewModelSavedEvent = detailViewModelSavedEvent;
             _detailViewModelSavedEvent.OnDetailViewModelSaved += _detailViewModelSavedEvent_OnOnDetailViewModelSaved;
-            Employees = new ObservableCollection<NavigationItemViewModel>();
+            NavigationItemViewModels = new ObservableCollection<NavigationItemViewModel>();
         }
 
-        private async void _detailViewModelSavedEvent_OnOnDetailViewModelSaved(object sender, int id)
+        private void _detailViewModelSavedEvent_OnOnDetailViewModelSaved(object sender, DetailViewModelSavedEventArgs arg)
         {
-            var outdatedNavigationItemViewModel = Employees.Single(navigationItem => navigationItem.Id == id);
-            await _employeeAccessor.ReloadEmployeeAsync(id);
-            var updatedEmployee = await _employeeAccessor.GetEmployeeByIdAsync(id);
-            outdatedNavigationItemViewModel.DisplayMember = $"{updatedEmployee.FirstName} {updatedEmployee.LastName}";
+            var outdatedNavigationItemViewModel = NavigationItemViewModels.SingleOrDefault(navigationItem => navigationItem.Id == arg.Id);
+            if (outdatedNavigationItemViewModel == null)
+            {
+                outdatedNavigationItemViewModel = new NavigationItemViewModel(arg.Id, arg.DisplayMember, _navigationSelectionChangedEvent);
+                NavigationItemViewModels.Add(outdatedNavigationItemViewModel);
+            }
+            else
+            {
+                outdatedNavigationItemViewModel.DisplayMember = arg.DisplayMember;
+            }
         }
 
         public async Task LoadAsync()
         {
-            var employees = await _employeeAccessor.GetAllEmployeesAsync();
-            foreach (var employee in employees)
+            var lookupItems = await _dataLookupRepository.GetLookupItemsAsync();
+            foreach (var lookupItem in lookupItems)
             {
-                string displayMember = $"{employee.FirstName} {employee.LastName}";
-                Employees.Add(new NavigationItemViewModel(employee.Id, displayMember, _navigationSelectionChangedEvent));
+                string displayMember = lookupItem.DisplayMember;
+                NavigationItemViewModels.Add(new NavigationItemViewModel(lookupItem.Id, displayMember, _navigationSelectionChangedEvent));
             }
-
         }
     }
 }

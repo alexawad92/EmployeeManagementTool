@@ -11,11 +11,12 @@ namespace EmployeeManagementTool.Events.Impls
 {
     public class DetailViewModelSavedEvent : IDetailViewModelSavedEvent
     {
-        public void RaiseDetailViewModelSavedEvent(int id)
+        public void RaiseDetailViewModelSavedEvent(DetailViewModelSavedEventArgs arg)
         {
-            OnDetailViewModelSaved?.Invoke(this, id);
+            OnDetailViewModelSaved?.Invoke(this, arg);
         }
 
-        public event EventHandler<int> OnDetailViewModelSaved;
+        public event EventHandler<DetailViewModelSavedEventArgs> OnDetailViewModelSaved;
     }
+
 }

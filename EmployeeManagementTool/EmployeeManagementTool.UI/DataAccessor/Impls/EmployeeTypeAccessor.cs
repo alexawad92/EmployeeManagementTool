@@ -12,16 +12,10 @@ using EmployeeManagementTool.DataModel;
 
 namespace EmployeeManagementTool.DataAccessor.Impls
 {
-    public class EmployeeTypeAccessor : IEmployeeTypeAccessor
+    public class EmployeeTypeAccessor : DatabaseRepository<EmployeeType>, IEmployeeTypeAccessor
     {
-        private readonly EmployeeManagementToolDbContext _context;
-        public EmployeeTypeAccessor(EmployeeManagementToolDbContext context)
+        public EmployeeTypeAccessor(EmployeeManagementToolDbContext context) : base(context)
         {
-            _context = context;
-        }
-        public async Task<IEnumerable<EmployeeType>> GetAllEmployeeTypesAsync()
-        {
-            return await _context.EmployeeTypes.ToListAsync();
         }
     }
 }

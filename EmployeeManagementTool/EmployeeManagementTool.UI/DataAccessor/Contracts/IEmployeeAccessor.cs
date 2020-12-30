@@ -9,14 +9,8 @@ using EmployeeManagementTool.DataModel;
 
 namespace EmployeeManagementTool.DataAccessor.Contracts
 {
-    public interface IEmployeeAccessor
+    public interface IEmployeeAccessor : IDatabaseRepository<Employee>
     {
-        Task<IEnumerable<Employee>> GetAllEmployeesAsync();
 
-        Task<Employee> GetEmployeeByIdAsync(int id);
-
-        Task SaveChangesAsync();
-        Task ReloadEmployeeAsync(int id);
-        bool HasChanges();
     }
 }

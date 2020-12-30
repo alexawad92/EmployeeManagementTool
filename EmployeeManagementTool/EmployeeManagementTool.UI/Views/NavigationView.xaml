@@ -48,6 +48,6 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <ItemsControl ItemsSource="{Binding Employees}" ItemTemplate="{StaticResource NaviItemTemplate}" ItemContainerStyle="{StaticResource NaviItemContainerStyle}"></ItemsControl>
+        <ItemsControl ItemsSource="{Binding NavigationItemViewModels}" ItemTemplate="{StaticResource NaviItemTemplate}" ItemContainerStyle="{StaticResource NaviItemContainerStyle}"></ItemsControl>
     </Grid>
 </UserControl>

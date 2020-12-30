@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
+using Autofac.Features.Indexed;
+
+using EmployeeManagementTool.Commands.Impls;
 using EmployeeManagementTool.DataAccessor.Contracts;
 using EmployeeManagementTool.Events.Contracts;
 using EmployeeManagementTool.ViewModels.Contracts;
@@ -14,54 +20,66 @@ namespace EmployeeManagementTool.ViewModels.Impls
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly IEmployeeAccessor _employeeAccessor;
-        private readonly IEmployeeTypeAccessor _employeeTypeAccessor;
-        private readonly IDetailViewModelSavedEvent _detailViewModelSavedEvent;
-        private INavigationViewModel _navigationViewModel;
-        private INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
-        private IDetailViewModel _detailViewModel;
+        private readonly IManagementViewModelSelectionChangedEvent _managementViewModelSelectionChangedEvent;
+        private readonly IIndex<string, IMainWindowViewModel> _mainViewModelCreator;
 
-        public IDetailViewModel DetailViewModel
+        private IMainWindowViewModel _currentViewModel;
+
+        public IMainWindowViewModel CurrentViewModel
         {
-            get { return _detailViewModel; }
+            get { return _currentViewModel; }
             set
             {
-                _detailViewModel = value;
+                _currentViewModel = value;
                 OnPropertyChanged();
             }
         }
 
-        public INavigationViewModel NavigationViewModel
+        public MainViewModel(IManagementViewModelSelectionChangedEvent managementViewModelSelectionChangedEvent, IIndex<string, IMainWindowViewModel> mainViewModelCreator)
         {
-            get { return _navigationViewModel; }
-            set
+            _mainViewModelCreator = mainViewModelCreator;
+            _managementViewModelSelectionChangedEvent = managementViewModelSelectionChangedEvent;
+            _managementViewModelSelectionChangedEvent.OnManagementViewModelSelectionChanged += _managementViewModelSelectionChangedEvent_OnOnManagementViewModelSelectionChanged;
+        }
+
+        public void Load()
+        {
+            CreateHomeViewModel();
+        }
+
+        private async void _managementViewModelSelectionChangedEvent_OnOnManagementViewModelSelectionChanged(object sender, string e)
+        {
+            switch (e)
             {
-                _navigationViewModel = value;
-                OnPropertyChanged();
+                case nameof(EmployeeManagementViewModel):
+                    await CreateEmployeeManagementViewModel();
+                    break;
+                case nameof(TeamManagementViewModel):
+                    await CreateTeamManagementViewModel();
+                    break;
+                case nameof(HomeViewModel):
+                    CreateHomeViewModel();
+                    break;
+                default:
+                    throw new Exception("Unknown ViewModel Name");
             }
-
         }
-        public MainViewModel(INavigationViewModel navigationViewModel, INavigationSelectionChangedEvent navigationSelectionChangedEvent, IEmployeeAccessor employeeAccessor, IEmployeeTypeAccessor employeeTypeAccessor, IDetailViewModelSavedEvent detailViewModelSavedEvent)
+
+        private async Task CreateTeamManagementViewModel()
         {
-            _employeeAccessor = employeeAccessor;
-            _employeeTypeAccessor = employeeTypeAccessor;
-            _detailViewModelSavedEvent = detailViewModelSavedEvent;
-            NavigationViewModel = navigationViewModel;
-            _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
-            _navigationSelectionChangedEvent.OnSelectedNavigationItemChanged+= _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged;
+            CurrentViewModel = _mainViewModelCreator[nameof(TeamManagementViewModel)];
+            await CurrentViewModel.LoadAsync();
         }
 
-        private void _navigationSelectionChangedEvent_OnOnSelectedNavigationItemChanged(object sender, int e)
+        private void CreateHomeViewModel()
         {
-            DetailViewModel = new DetailViewModel(_employeeAccessor, _employeeTypeAccessor, _detailViewModelSavedEvent);
-            DetailViewModel.LoadAsync(e);
+            CurrentViewModel = _mainViewModelCreator[nameof(HomeViewModel)];
         }
 
-        public async Task OnLoad()
+        private async Task CreateEmployeeManagementViewModel()
         {
-
-            await NavigationViewModel.LoadAsync();
+            CurrentViewModel = _mainViewModelCreator[nameof(EmployeeManagementViewModel)];
+            await CurrentViewModel.LoadAsync();
         }
-
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeeManagementTool.ViewModels.Contracts
 {
-    public interface IViewModelBase : INotifyPropertyChanged
+    public interface IMainWindowViewModel : IViewModelBase
     {
+        Task LoadAsync();
     }
 }

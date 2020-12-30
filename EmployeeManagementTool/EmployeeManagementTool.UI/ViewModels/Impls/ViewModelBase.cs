@@ -14,7 +14,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
     public class ViewModelBase : IViewModelBase
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

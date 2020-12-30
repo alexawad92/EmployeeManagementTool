@@ -9,7 +9,7 @@ using EmployeeManagementTool.DataModel;
 
 namespace EmployeeManagementTool.DataAccessor.Contracts
 {
-    public interface IEmployeeTypeAccessor: IDatabaseRepository<EmployeeType>
+    public interface ITeamDataLookupRepository : IDataLookupRepository
     {
     }
 }
