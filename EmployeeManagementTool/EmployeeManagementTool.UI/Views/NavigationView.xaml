@@ -1,41 +1,39 @@
-﻿<UserControl x:Class="EmployeeManagementTool.Views.NavigationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EmployeeManagementTool.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="EmployeeManagementTool.Views.NavigationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:EmployeeManagementTool.Views"
+    xmlns:themes="clr-namespace:EmployeeManagementTool.Themes">
 
     <UserControl.Resources>
         <Style x:Key="NaviItemContainerStyle" TargetType="ContentPresenter">
-            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-            <Setter Property="Margin" Value="2"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="2" />
         </Style>
         <DataTemplate x:Key="NaviItemTemplate">
-            <!--for every item in the list I want to show a-->
+            <!--  for every item in the list I want to show a  -->
             <Button Command="{Binding NavigationItemClickCommand}">
                 <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Content" Value="{Binding DisplayMember}"></Setter>
-                        <Setter Property="Margin" Value="4"></Setter>
-                        <Setter Property="FontSize" Value="14"></Setter>
+                    <Style BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+                        <Setter Property="Content" Value="{Binding DisplayMember}" />
+                        <Setter Property="Margin" Value="4" />
+                        <Setter Property="FontSize" Value="14" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
                                     <Grid x:Name="grid">
-                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                        </ContentPresenter>
+                                        <ContentPresenter
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="FontWeight" Value="Bold"></Setter>
-                                            <Setter Property="Opacity" Value="1"></Setter>
+                                            <Setter Property="Cursor" Value="Hand" />
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                            <Setter Property="Opacity" Value="1" />
                                         </Trigger>
                                         <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="FontWeight" Value="Normal"></Setter>
+                                            <Setter Property="FontWeight" Value="Normal" />
                                         </Trigger>
 
                                     </ControlTemplate.Triggers>
@@ -48,6 +46,9 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <ItemsControl ItemsSource="{Binding NavigationItemViewModels}" ItemTemplate="{StaticResource NaviItemTemplate}" ItemContainerStyle="{StaticResource NaviItemContainerStyle}"></ItemsControl>
+        <ItemsControl
+            ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
+            ItemTemplate="{StaticResource NaviItemTemplate}"
+            ItemsSource="{Binding NavigationItemViewModels}" />
     </Grid>
 </UserControl>

@@ -116,6 +116,11 @@
     <Compile Include="ModelWrappers\EmployeeTypeWrapper.cs" />
     <Compile Include="ModelWrappers\EmployeeWrapper.cs" />
     <Compile Include="ModelWrappers\TeamWrapper.cs" />
+    <Compile Include="Themes\Theme.cs" />
+    <Compile Include="Themes\ThemeResourceExtension.cs" />
+    <Compile Include="Themes\ThemeResourceKey.cs" />
+    <Compile Include="Themes\ThemeType.cs" />
+    <Compile Include="Themes\ThemeResourceDictionary.cs" />
     <Compile Include="ViewModels\Contracts\IDetailViewModel.cs" />
     <Compile Include="ViewModels\Contracts\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />
@@ -160,6 +165,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Styles\ButtonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EmployeeDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -228,6 +237,7 @@
   <ItemGroup>
     <Resource Include="Icons\img_542890.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

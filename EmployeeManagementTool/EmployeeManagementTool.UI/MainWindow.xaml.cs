@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using EmployeeManagementTool.Themes;
 using EmployeeManagementTool.ViewModels.Impls;
 
 
@@ -35,6 +36,12 @@ namespace EmployeeManagementTool
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
             _mainViewModel.Load();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var theme = Theme.ThemeType == ThemeType.Light ? ThemeType.Dark : ThemeType.Light;
+            Theme.LoadThemeType(theme);
         }
     }
 }
