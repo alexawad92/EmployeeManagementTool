@@ -212,7 +212,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\19-512.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EmployeeManagementTool.DataAccess\EmployeeManagementTool.DataAccess.csproj">
       <Project>{6F6A4541-3FCF-4F2F-A2F4-D4D34EAE49CE}</Project>
@@ -222,6 +224,9 @@
       <Project>{F07864A2-B318-43E4-B780-45804601D296}</Project>
       <Name>EmployeeManagementTool.DataModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\img_542890.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
