@@ -11,26 +11,43 @@
         </Style>
         <DataTemplate x:Key="NaviItemTemplate">
             <!--  for every item in the list I want to show a  -->
-            <Button Command="{Binding NavigationItemClickCommand}">
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="240"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding NavigationItemClickCommand}" Grid.Column="0">
                 <Button.Style>
                     <Style TargetType="Button">
-                        <Setter Property="Content" Value="{Binding DisplayMember}" />
-                        <Setter Property="Margin" Value="4" />
+                        <!--<Setter Property="Content" Value="{Binding DisplayMember}" />-->
+                        <Setter Property="Margin" Value="0" />
                         <Setter Property="FontSize" Value="20" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Grid x:Name="grid">
-                                        <ContentPresenter
-                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                    </Grid>
+                                    <Border x:Name="myBorder">
+                                        <Grid x:Name="grid">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                            <ContentPresenter
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                            
+                                            <Label Grid.Column="0" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Content="{Binding DisplayMember}" Margin="0"></Label>
+                                            <Label x:Name="glyphLabel" Visibility="Hidden" Grid.Column="1" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Content="&#xE70F;" FontFamily="Segoe MDL2 Assets" Margin="0"></Label>
+                                            </Grid>
+                                    </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Cursor" Value="Hand" />
                                             <Setter Property="FontWeight" Value="Bold" />
                                             <Setter Property="Opacity" Value="1" />
-                                        </Trigger>
+                                            <Setter TargetName="myBorder" Property="Background" Value="#463f40"></Setter>
+                                            <Setter TargetName="glyphLabel" Property="Visibility" Value="Visible"></Setter>
+                                            </Trigger>
                                         <Trigger Property="IsPressed" Value="True">
                                             <Setter Property="FontWeight" Value="Normal" />
                                         </Trigger>
@@ -42,6 +59,7 @@
                     </Style>
                 </Button.Style>
             </Button>
+            </Grid>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
@@ -49,7 +67,9 @@
             <ItemsControl
             ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
             ItemTemplate="{StaticResource NaviItemTemplate}"
-            ItemsSource="{Binding NavigationItemViewModels}" />
+            ItemsSource="{Binding NavigationItemViewModels}" 
+            HorizontalContentAlignment="Stretch"
+            HorizontalAlignment="Stretch"/>
         </ScrollViewer>
     </Grid>
 </UserControl>

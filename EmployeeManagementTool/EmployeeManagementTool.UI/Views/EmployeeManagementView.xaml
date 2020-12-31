@@ -37,6 +37,7 @@
             <!--</Border>-->
         </Grid>
         <Border Grid.Row="1" Grid.Column="0" BorderBrush="#463f47" BorderThickness="2">
+        <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" BorderBrush="#463f47" BorderThickness="2">
             <views:NavigationView   DataContext="{Binding NavigationViewModel}" ></views:NavigationView>
         </Border>
         <ContentControl Grid.Row ="0" Grid.RowSpan="2" Grid.Column="1" Content="{Binding DetailViewModel}"></ContentControl>

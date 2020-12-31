@@ -64,6 +64,23 @@
                         </TextBlock>
                     </Grid>
                 </Button>
+                <Button Command="{Binding DeleteCommand}" Padding="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0">
+                            <Run Text="&#xE74D;"
+                                 FontFamily="Segoe MDL2 Assets"
+                                 FontSize="20"/>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                            <Run Text="Delete"
+                                 FontSize="15"/>
+                        </TextBlock>
+                    </Grid>
+                </Button>
             </StackPanel>
         </Grid>
     </GroupBox>

@@ -13,6 +13,7 @@ using EmployeeManagementTool.DataModel;
 using EmployeeManagementTool.Events.Contracts;
 using EmployeeManagementTool.ModelWrappers;
 using EmployeeManagementTool.ViewModels.Contracts;
+using EmployeeManagementTool.Views.Services.Contracts;
 
 
 namespace EmployeeManagementTool.ViewModels.Impls
@@ -21,6 +22,8 @@ namespace EmployeeManagementTool.ViewModels.Impls
     {
         private readonly ITeamAccessor _teamAccessor;
         private readonly IDetailViewModelSavedEvent _detailViewModelSavedEvent;
+        private readonly IDetailViewModelDeletedEvent _detailViewModelDeletedEvent;
+        private readonly IMessageDialogService _messageDialogService;
         private Team _team;
         private TeamWrapper _teamWrapper;
         private string _viewModelHeader;
@@ -76,6 +79,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
             }
         }
         public ICommand SaveCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand AddEmployeeCommand { get; set; }
         public ICommand RemoveEmployeeCommand { get; set; }
 
@@ -89,16 +93,39 @@ namespace EmployeeManagementTool.ViewModels.Impls
             }
         }
 
-        public TeamDetailViewModel(ITeamAccessor teamAccessor , IDetailViewModelSavedEvent detailViewModelSavedEvent)
+        public TeamDetailViewModel(ITeamAccessor teamAccessor , IDetailViewModelSavedEvent detailViewModelSavedEvent,
+                                   IDetailViewModelDeletedEvent detailViewModelDeletedEvent, IMessageDialogService messageDialogService)
         {
             _teamAccessor = teamAccessor;
             _detailViewModelSavedEvent = detailViewModelSavedEvent;
+            _detailViewModelDeletedEvent = detailViewModelDeletedEvent;
+            _messageDialogService = messageDialogService;
             ViewModelHeader = "Team Details";
             SaveCommand = new ButtonCommand(OnSaveExecute, OnSaveCanExecute);
             AddEmployeeCommand = new ButtonCommand(OnAddEmployeeCommandExecuted, CanAddEmployeeCommandBeExecuted);
             RemoveEmployeeCommand = new ButtonCommand(OnRemoveEmployeeCommandExecuted, CanRemoveEmployeeCommandBeExecuted);
             AssignedEmployees = new ObservableCollection<Employee>();
             UnassignedEmployees = new ObservableCollection<Employee>();
+            DeleteCommand = new ButtonCommand(OnDeleteExecute, () => { return true; });
+        }
+
+        private async void OnDeleteExecute(object obj)
+        {
+            int idToBeDeleted = _team.Id;
+            string displayMemberToBeDeleted = _team.Name;
+
+            var userChoice = await
+                                 _messageDialogService.ShowOkCancelDialogAsync(
+                                     $"{displayMemberToBeDeleted} is about to be deleted from the database. Are you sure you want to continue?", "Confirm Deletion");
+            if (userChoice == MessageDialogResult.Cancel)
+                return;
+            _teamAccessor.Remove(_team);
+            await _teamAccessor.SaveChangesAsync();
+            _detailViewModelDeletedEvent.RaiseDetailViewModelDeletedEvent(new DetailViewModelDeleteEventArgs()
+            {
+                Id = idToBeDeleted,
+                DisplayMember = displayMemberToBeDeleted
+            });
         }
 
         private bool CanRemoveEmployeeCommandBeExecuted()

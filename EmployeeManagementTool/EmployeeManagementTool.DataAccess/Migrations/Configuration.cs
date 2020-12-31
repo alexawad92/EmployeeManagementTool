@@ -49,6 +49,17 @@ namespace EmployeeManagementTool.DataAccess.Migrations
                        context.Employees.Single(e=>e.FirstName == "Caleb" && e.LastName=="Faraj"),
                     },
                 });
+            context.Teams.AddOrUpdate(m => m.Name,
+                new Team()
+                {
+                    Name = "Scientists",
+                    Employees = new List<Employee>()
+                    {
+                        context.Employees.Single(e=>e.FirstName == "John" && e.LastName=="Kevin"),
+                        context.Employees.Single(e=>e.FirstName == "Chirstie" && e.LastName=="Jeong"),
+                        context.Employees.Single(e=>e.FirstName == "Monica" && e.LastName=="Lina"),
+                    },
+                });
 
             context.SaveChanges();
 
