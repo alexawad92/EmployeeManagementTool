@@ -18,13 +18,25 @@ namespace EmployeeManagementTool.ViewModels.Impls
     public class TeamManagementViewModel: ManagementViewModelBase
     {
         private readonly ITeamDataLookupRepository _teamDataLookupRepository;
+        private string _subMessage;
+
+        public string SubMessage
+        {
+            get { return _subMessage; }
+            set
+            {
+                _subMessage = value;
+                OnPropertyChanged();
+            }
+        }
 
         public TeamManagementViewModel(INavigationSelectionChangedEvent navigationSelectionChangedEvent,
                                        IDetailViewModelSavedEvent detailViewModelSavedEvent,
+                                       IDetailViewModelDeletedEvent detailViewModelDeletedEvent,
                                        IManagementViewModelSelectionChangedEvent managementViewModelSelectionChangedEvent,
                                        ITeamDataLookupRepository teamDataLookupRepository,
                                        IIndex<string, IDetailViewModel> detailViewModelCreator) :
-            base(navigationSelectionChangedEvent, detailViewModelSavedEvent, managementViewModelSelectionChangedEvent, detailViewModelCreator)
+            base(navigationSelectionChangedEvent, detailViewModelSavedEvent, detailViewModelDeletedEvent, managementViewModelSelectionChangedEvent, detailViewModelCreator)
         {
             _teamDataLookupRepository = teamDataLookupRepository;
         }
@@ -43,8 +55,11 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         public override async Task LoadAsync()
         {
-            NavigationViewModel = new NavigationViewModel(_teamDataLookupRepository, _navigationSelectionChangedEvent, _detailViewModelSavedEvent);
+            SubMessage = "Teams are being loaded from the database";
+            IsLoading = true;
+            NavigationViewModel = new NavigationViewModel(_teamDataLookupRepository, _navigationSelectionChangedEvent, _detailViewModelSavedEvent, _detailViewModelDeletedEvent);
             await NavigationViewModel.LoadAsync();
+            IsLoading = false;
         }
     }
 }

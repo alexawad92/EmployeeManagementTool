@@ -13,6 +13,8 @@ using EmployeeManagementTool.Events.Contracts;
 using EmployeeManagementTool.Events.Impls;
 using EmployeeManagementTool.ViewModels.Contracts;
 using EmployeeManagementTool.ViewModels.Impls;
+using EmployeeManagementTool.Views.Services.Contracts;
+using EmployeeManagementTool.Views.Services.Impls;
 
 
 namespace EmployeeManagementTool.Autofac
@@ -25,6 +27,7 @@ namespace EmployeeManagementTool.Autofac
             var builder = new ContainerBuilder();
             builder.RegisterType<NavigationSelectionChangedEvent>().As<INavigationSelectionChangedEvent>().SingleInstance();
             builder.RegisterType<DetailViewModelSavedEvent>().As<IDetailViewModelSavedEvent>().SingleInstance();
+            builder.RegisterType<DetailViewModelDeletedEvent>().As<IDetailViewModelDeletedEvent>().SingleInstance();
             builder.RegisterType<ManagementViewModelSelectionChangedEvent>().As<IManagementViewModelSelectionChangedEvent>().SingleInstance();
             builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
             builder.RegisterType<EmployeeManagementViewModel>().Keyed<IMainWindowViewModel>(nameof(EmployeeManagementViewModel));
@@ -40,6 +43,8 @@ namespace EmployeeManagementTool.Autofac
             builder.RegisterType<TeamDataLookupRepository>().AsImplementedInterfaces();
             builder.RegisterType<EmployeeDataLookupRepository>().AsImplementedInterfaces();
             builder.RegisterType<TeamAccessor>().As<ITeamAccessor>();
+            builder.RegisterType<MessageDialogService>().As<IMessageDialogService>();
+
             return builder.Build();
         }
     }

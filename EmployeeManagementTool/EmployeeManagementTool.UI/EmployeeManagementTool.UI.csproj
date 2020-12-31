@@ -41,20 +41,31 @@
     <Reference Include="Autofac, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.6.1.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.2.4.3\lib\net47\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Classic" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -72,6 +83,8 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -107,20 +120,19 @@
     <Compile Include="DataAccessor\Impls\EmployeeTypeAccessor.cs" />
     <Compile Include="DataAccessor\Impls\EmployeeDataLookupRepository.cs" />
     <Compile Include="DataAccessor\Impls\TeamAccessor.cs" />
+    <Compile Include="Events\Contracts\IDetailViewModelDeletedEvent.cs">
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
     <Compile Include="Events\Contracts\IDetailViewModelSavedEvent.cs" />
     <Compile Include="Events\Contracts\IManagementViewModelSelectionChangedEvent.cs" />
     <Compile Include="Events\Contracts\INavigationSelectionChangedEvent.cs" />
+    <Compile Include="Events\Impls\DetailViewModelDeletedEvent.cs" />
     <Compile Include="Events\Impls\DetailViewModelSavedEvent.cs" />
     <Compile Include="Events\Impls\ManagementViewModelSelectionChangedEvent.cs" />
     <Compile Include="Events\Impls\NavigationSelectionChangedEvent.cs" />
     <Compile Include="ModelWrappers\EmployeeTypeWrapper.cs" />
     <Compile Include="ModelWrappers\EmployeeWrapper.cs" />
     <Compile Include="ModelWrappers\TeamWrapper.cs" />
-    <Compile Include="Themes\Theme.cs" />
-    <Compile Include="Themes\ThemeResourceExtension.cs" />
-    <Compile Include="Themes\ThemeResourceKey.cs" />
-    <Compile Include="Themes\ThemeType.cs" />
-    <Compile Include="Themes\ThemeResourceDictionary.cs" />
     <Compile Include="ViewModels\Contracts\IDetailViewModel.cs" />
     <Compile Include="ViewModels\Contracts\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />
@@ -141,12 +153,20 @@
     <Compile Include="Views\EmployeeManagementView.xaml.cs">
       <DependentUpon>EmployeeManagementView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExternalViews\CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExternalViews\LoadingPanel.xaml.cs">
+      <DependentUpon>LoadingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Services\Contracts\IMessageDialogService.cs" />
+    <Compile Include="Views\Services\Impls\MessageDialogService.cs" />
     <Compile Include="Views\TeamDetailView.xaml.cs">
       <DependentUpon>TeamDetailView.xaml</DependentUpon>
     </Compile>
@@ -165,15 +185,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\Styles\ButtonStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\EmployeeDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EmployeeManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExternalViews\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExternalViews\LoadingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,6 +260,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\img_542890.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\HomeIcon.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

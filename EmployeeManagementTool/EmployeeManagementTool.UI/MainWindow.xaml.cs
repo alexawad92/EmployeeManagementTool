@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
-using EmployeeManagementTool.Themes;
 using EmployeeManagementTool.ViewModels.Impls;
 
 
@@ -22,7 +22,7 @@ namespace EmployeeManagementTool
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private MainViewModel _mainViewModel;
         public MainWindow(MainViewModel viewModel)
@@ -36,12 +36,6 @@ namespace EmployeeManagementTool
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
             _mainViewModel.Load();
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var theme = Theme.ThemeType == ThemeType.Light ? ThemeType.Dark : ThemeType.Light;
-            Theme.LoadThemeType(theme);
         }
     }
 }

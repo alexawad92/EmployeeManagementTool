@@ -11,6 +11,6 @@ namespace EmployeeManagementTool.DataAccessor.Contracts
 {
     public interface IEmployeeAccessor : IDatabaseRepository<Employee>
     {
-
+        Task<Team> IsPartOfAnyTeam(int employeeId);
     }
 }

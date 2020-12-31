@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using EmployeeManagementTool.Views.Services.Contracts;
+
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+
+using MessageDialogResult = EmployeeManagementTool.Views.Services.Contracts.MessageDialogResult;
+
+
+namespace EmployeeManagementTool.Views.Services.Impls
+{
+    public class MessageDialogService : IMessageDialogService
+    {
+        private MetroWindow MetroWindow => (MetroWindow)App.Current.MainWindow;
+        public async Task<MessageDialogResult> ShowOkCancelDialogAsync(string text, string title)
+        {
+            var result = await MetroWindow.ShowMessageAsync(title, text, MessageDialogStyle.AffirmativeAndNegative);
+            return result == MahApps.Metro.Controls.Dialogs.MessageDialogResult.Affirmative ? MessageDialogResult.OK : MessageDialogResult.Cancel;
+        }
+
+        public async Task ShowInfoDialogAsync(string text, string title)
+        {
+            await MetroWindow.ShowMessageAsync(title, text, MessageDialogStyle.Affirmative);
+        }
+    }
+}

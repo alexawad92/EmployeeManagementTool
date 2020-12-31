@@ -4,30 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:EmployeeManagementTool.Views"
+             xmlns:externalViews="clr-namespace:EmployeeManagementTool.Views.ExternalViews"
              xmlns:viewmodel="clr-namespace:EmployeeManagementTool.ViewModels.Impls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="bool2visibility" />
         <DataTemplate DataType="{x:Type viewmodel:EmployeeDetailViewModel}">
             <views:EmployeeDetailView/>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="250"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0">
+        <!--<StackPanel Grid.Row="0" Grid.Column="0">
             <Button Content="Create New Employee" Command="{Binding CreateNewItem}"></Button>
             <Button Content="Home" Command="{Binding GoHomeCommand}"></Button>
-        </StackPanel>
+        </StackPanel>-->
+        <Grid Grid.Row="0">
+            <!--<Border BorderThickness="5" BorderBrush="#463f47" >-->
+                <TextBlock Text="Employees Available in the Database" HorizontalAlignment="Stretch" FontSize="25" TextWrapping="Wrap" Background="#463f47" Padding="5 10 5 10">
 
-        <views:NavigationView Grid.Row ="1" Grid.Column="0" DataContext="{Binding NavigationViewModel}"></views:NavigationView>
-        <ContentControl Grid.Row ="1" Grid.Column="1" Content="{Binding DetailViewModel}"></ContentControl>
+                </TextBlock>
+            <!--</Border>-->
+        </Grid>
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="#463f47" BorderThickness="2">
+            <views:NavigationView   DataContext="{Binding NavigationViewModel}" ></views:NavigationView>
+        </Border>
+        <ContentControl Grid.Row ="0" Grid.RowSpan="2" Grid.Column="1" Content="{Binding DetailViewModel}"></ContentControl>
+        <!--<externalViews:LoadingPanel Grid.Row="2" Grid.Column="0" IsLoading="{Binding IsLoading}" Message="{Binding MainLoadingMessage}" SubMessage="{Binding SubMessage}">-->
+        <externalViews:LoadingPanel Grid.Row ="0" Grid.RowSpan="2" Grid.Column="1" IsLoading="{Binding IsLoading}" 
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Message="{Binding MainLoadingMessage}" SubMessage="{Binding SubMessage}">
+
+        </externalViews:LoadingPanel>
+        <Grid Grid.Row="2" Column="1" Margin="0 0 5 5">
+            <Button HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center" Command="{Binding GoHomeCommand}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Run Text="&#xE80F;"
+                         FontFamily="Segoe MDL2 Assets"
+                         FontSize="25"/>
+                    </TextBlock>
+
+                    <TextBlock Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Run Text="Home"
+                             FontSize="15"/>
+                    </TextBlock>
+                </Grid>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

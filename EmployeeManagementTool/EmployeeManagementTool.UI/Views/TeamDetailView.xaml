@@ -7,7 +7,7 @@
              xmlns:dataModel="clr-namespace:EmployeeManagementTool.DataModel;assembly=EmployeeManagementTool.DataModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <GroupBox Header="{Binding ViewModelHeader, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10">
+    <GroupBox Header="{Binding ViewModelHeader, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 0 10">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -15,12 +15,12 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Team Name" Margin="10 10 10 0"></Label>
-            <TextBox Grid.Row="1" Text="{Binding TeamWrapper.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"></TextBox>
-            <Grid Grid.Row="2"  Margin="10">
+            <Label Grid.Row="0" Content="Team Name" Margin="10 10 10 0" FontSize="20"></Label>
+            <TextBox Grid.Row="1" Text="{Binding TeamWrapper.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" FontSize="20"></TextBox>
+            <Grid Grid.Row="2"  Margin="10" >
                 <Grid.Resources>
                     <DataTemplate DataType="{x:Type dataModel:Employee}">
-                        <TextBlock> <Run Text="{Binding FirstName}"/> <Run Text="{Binding LastName}"/></TextBlock>
+                        <TextBlock FontSize="20"> <Run Text="{Binding FirstName}"/> <Run Text="{Binding LastName}"/></TextBlock>
                     </DataTemplate>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
@@ -32,17 +32,38 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label Content="Added Employees"></Label>
-                <ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AssignedEmployees}" SelectedItem="{Binding SelectedAssignedEmployee}"></ListView>
+
+                <Label Content="Added Employees" FontSize="26"></Label>
+                <Border Grid.Row="1" Grid.Column="0"  BorderBrush="White" BorderThickness="1">
+                <ListView ItemsSource="{Binding AssignedEmployees}" SelectedItem="{Binding SelectedAssignedEmployee}"></ListView>
+                </Border>
                 <StackPanel Grid.Row="1" Grid.Column="1">
                     <Button Content="&lt;&lt;" Margin="10" Command="{Binding AddEmployeeCommand}"></Button>
                     <Button Content="&gt;&gt;" Margin="10 0 10 10" Command="{Binding RemoveEmployeeCommand}"></Button>
                 </StackPanel>
-                <Label Grid.Row="0" Grid.Column="2" Content="Available Employees"></Label>
-                <ListView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding UnassignedEmployees}" SelectedItem="{Binding SelectedUnassignedEmployee}"></ListView>
+                <Label Grid.Row="0" Grid.Column="2" Content="Available Employees" FontSize="26"></Label>
+                <Border Grid.Row="1" Grid.Column="2" BorderBrush="White" BorderThickness="1">
+                    <ListView  ItemsSource="{Binding UnassignedEmployees}" SelectedItem="{Binding SelectedUnassignedEmployee}"></ListView>
+                </Border>
             </Grid>
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Button Content="Save" Command="{Binding SaveCommand}"></Button>
+                <Button Command="{Binding SaveCommand}" Padding="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 5 0">
+                            <Run Text="&#xE74E;"
+                                 FontFamily="Segoe MDL2 Assets"
+                                 FontSize="20"/>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                            <Run Text="Save"
+                                 FontSize="15"/>
+                        </TextBlock>
+                    </Grid>
+                </Button>
             </StackPanel>
         </Grid>
     </GroupBox>

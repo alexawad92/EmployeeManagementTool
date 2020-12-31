@@ -27,6 +27,5 @@ namespace EmployeeManagementTool.DataAccessor.Impls
         {
             return await Task.Run(() => Context.Employees.ToListAsync());
         }
-
     }
 }

@@ -2,8 +2,7 @@
     x:Class="EmployeeManagementTool.Views.NavigationView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:EmployeeManagementTool.Views"
-    xmlns:themes="clr-namespace:EmployeeManagementTool.Themes">
+    xmlns:local="clr-namespace:EmployeeManagementTool.Views">
 
     <UserControl.Resources>
         <Style x:Key="NaviItemContainerStyle" TargetType="ContentPresenter">
@@ -14,10 +13,10 @@
             <!--  for every item in the list I want to show a  -->
             <Button Command="{Binding NavigationItemClickCommand}">
                 <Button.Style>
-                    <Style BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+                    <Style TargetType="Button">
                         <Setter Property="Content" Value="{Binding DisplayMember}" />
                         <Setter Property="Margin" Value="4" />
-                        <Setter Property="FontSize" Value="14" />
+                        <Setter Property="FontSize" Value="20" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -46,9 +45,11 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <ItemsControl
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ItemsControl
             ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
             ItemTemplate="{StaticResource NaviItemTemplate}"
             ItemsSource="{Binding NavigationItemViewModels}" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

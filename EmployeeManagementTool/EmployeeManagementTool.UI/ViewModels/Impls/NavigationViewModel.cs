@@ -24,18 +24,32 @@ namespace EmployeeManagementTool.ViewModels.Impls
     {
         private readonly IDataLookupRepository _dataLookupRepository;
         private readonly INavigationSelectionChangedEvent _navigationSelectionChangedEvent;
+        private readonly IDetailViewModelDeletedEvent _detailViewModelDeletedEvent;
+
         private readonly IDetailViewModelSavedEvent _detailViewModelSavedEvent;
         public ObservableCollection<NavigationItemViewModel> NavigationItemViewModels { get; set; }
     
         public NavigationViewModel(IDataLookupRepository dataLookupRepository, 
                                    INavigationSelectionChangedEvent navigationSelectionChangedEvent, 
-                                   IDetailViewModelSavedEvent detailViewModelSavedEvent)
+                                   IDetailViewModelSavedEvent detailViewModelSavedEvent,
+                                   IDetailViewModelDeletedEvent detailViewModelDeletedEvent)
         {
             _dataLookupRepository = dataLookupRepository;
             _navigationSelectionChangedEvent = navigationSelectionChangedEvent;
             _detailViewModelSavedEvent = detailViewModelSavedEvent;
             _detailViewModelSavedEvent.OnDetailViewModelSaved += _detailViewModelSavedEvent_OnOnDetailViewModelSaved;
+            _detailViewModelDeletedEvent = detailViewModelDeletedEvent;
+            _detailViewModelDeletedEvent.OnDetailViewModelDeleted += OnDetailViewModelDeleted;
             NavigationItemViewModels = new ObservableCollection<NavigationItemViewModel>();
+        }
+
+        private void OnDetailViewModelDeleted(object sender, DetailViewModelDeleteEventArgs args)
+        {
+            NavigationItemViewModel navigationItemViewModelToBeRemoved = NavigationItemViewModels.SingleOrDefault(e => e.Id == args.Id
+                                                                                                                       && e.DisplayMember ==
+                                                                                                                       args.DisplayMember);
+            if (navigationItemViewModelToBeRemoved != null)
+                NavigationItemViewModels.Remove(navigationItemViewModelToBeRemoved);
         }
 
         private void _detailViewModelSavedEvent_OnOnDetailViewModelSaved(object sender, DetailViewModelSavedEventArgs arg)

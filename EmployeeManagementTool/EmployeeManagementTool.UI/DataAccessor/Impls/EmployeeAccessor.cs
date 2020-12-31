@@ -19,5 +19,11 @@ namespace EmployeeManagementTool.DataAccessor.Impls
         public EmployeeAccessor(EmployeeManagementToolDbContext context) : base(context)
         {
         }
+
+        public async Task<Team> IsPartOfAnyTeam(int employeeId)
+        {
+            return await Context.Teams.AsNoTracking().Include(t => t.Employees)
+                       .SingleOrDefaultAsync(t => t.Employees.Any(e => e.Id == employeeId));
+        }
     }
 }
