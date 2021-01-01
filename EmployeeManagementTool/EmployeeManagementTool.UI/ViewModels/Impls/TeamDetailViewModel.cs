@@ -119,6 +119,9 @@ namespace EmployeeManagementTool.ViewModels.Impls
                                      $"{displayMemberToBeDeleted} is about to be deleted from the database. Are you sure you want to continue?", "Confirm Deletion");
             if (userChoice == MessageDialogResult.Cancel)
                 return;
+
+            TeamWrapper.PropertyChanged -= TeamWrapper_OnPropertyChanged;
+            TeamWrapper.ErrorsChanged -= TeamWrapper_OnErrorChanged;
             _teamAccessor.Remove(_team);
             await _teamAccessor.SaveChangesAsync();
             _detailViewModelDeletedEvent.RaiseDetailViewModelDeletedEvent(new DetailViewModelDeleteEventArgs()
@@ -157,7 +160,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         private bool OnSaveCanExecute()
         {
-            return HasChanges;
+            return TeamWrapper!=null && HasChanges && !TeamWrapper.HasErrors;
         }
 
         private async void OnSaveExecute(object obj)
@@ -175,6 +178,11 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         public async Task LoadAsync(int id)
         {
+            if (TeamWrapper != null)
+            {
+                TeamWrapper.PropertyChanged -= TeamWrapper_OnPropertyChanged;
+                TeamWrapper.ErrorsChanged -= TeamWrapper_OnErrorChanged;
+            }
             _team = id > 0 ? await _teamAccessor.GetEntityByIdAsync(id) : CreateNewTeam();
             _allEmployees = await _teamAccessor.GetAllEmployeesAsync();
             foreach (var assignedEmployee in _team.Employees)
@@ -189,7 +197,15 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
             var teamWrapper = new TeamWrapper(_team);
             TeamWrapper = teamWrapper;
+            if (TeamWrapper.Id == 0)
+                TeamWrapper.Name = string.Empty;
             teamWrapper.PropertyChanged += TeamWrapper_OnPropertyChanged;
+            teamWrapper.ErrorsChanged += TeamWrapper_OnErrorChanged;
+        }
+
+        private void TeamWrapper_OnErrorChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            ((ButtonCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         private Team CreateNewTeam()

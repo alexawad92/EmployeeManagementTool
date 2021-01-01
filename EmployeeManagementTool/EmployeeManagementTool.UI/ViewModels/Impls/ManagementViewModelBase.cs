@@ -46,6 +46,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
             set
             {
                 _isLoading = value;
+                ((ButtonCommand)CreateNewItem).RaiseCanExecuteChanged();
                 OnPropertyChanged();
             }
         }
@@ -87,8 +88,13 @@ namespace EmployeeManagementTool.ViewModels.Impls
             _detailViewModelSavedEvent = detailViewModelSavedEvent;
             _detailViewModelCreator = detailViewModelCreator;
             GoHomeCommand = new ButtonCommand(OnGoHomeCommandExecute, () => { return true; });
-            CreateNewItem = new ButtonCommand(OnCreateNewItemExecute, () => { return true; });
+            CreateNewItem = new ButtonCommand(OnCreateNewItemExecute, CanCreateNewItemBeExecuted);
             MainLoadingMessage = "Please Wait...";
+        }
+
+        public bool CanCreateNewItemBeExecuted()
+        {
+            return !IsLoading;
         }
 
         private void OnDetailViewModelDeleted(object sender, DetailViewModelDeleteEventArgs e)

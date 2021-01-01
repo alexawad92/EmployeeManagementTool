@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,64 +11,59 @@ using EmployeeManagementTool.ViewModels.Impls;
 
 namespace EmployeeManagementTool.ModelWrappers
 {
-    public class EmployeeWrapper : ViewModelBase
+    public class EmployeeWrapper : WrapperBase<Employee>
     {
-        private readonly Employee _employee;
-        public EmployeeWrapper(Employee employee)
+        public EmployeeWrapper(Employee employee):base(employee)
         {
-            _employee = employee;
         }
 
-        public int Id => _employee.Id;
+        public int Id => Model.Id;
 
         public string FirstName
         {
-            get => _employee.FirstName;
+            get { return GetValue<string>(); }
             set
             {
-                _employee.FirstName = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public string LastName
         {
-            get => _employee.LastName;
+            get { return GetValue<string>(); }
             set
             {
-                _employee.LastName = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public int EmployeeTypeId
         {
-            get => _employee.EmployeeTypeId;
+            get { return GetValue<int>(); }
             set
             {
-                _employee.EmployeeTypeId = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public DateTime DateOfBirth
         {
-            get => _employee.DateOfBirth;
+            get { return GetValue<DateTime>(); }
             set
             {
-                _employee.DateOfBirth = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public Gender Gender
         {
-            get => _employee.Gender;
+            get { return GetValue<Gender>(); }
             set
             {
-                _employee.Gender = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
+
+   
     }
 }

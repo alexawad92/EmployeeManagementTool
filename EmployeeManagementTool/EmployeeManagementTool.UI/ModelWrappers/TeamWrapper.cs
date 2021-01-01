@@ -10,23 +10,20 @@ using EmployeeManagementTool.ViewModels.Impls;
 
 namespace EmployeeManagementTool.ModelWrappers
 {
-    public class TeamWrapper : ViewModelBase
+    public class TeamWrapper : WrapperBase<Team>
     {
-        private readonly Team _team;
 
-        public TeamWrapper(Team team)
+        public TeamWrapper(Team team) :base(team)
         {
-            _team = team;
         }
-        public int Id => _team.Id;
+        public int Id => Model.Id;
 
         public string Name
         {
-            get { return _team.Name; }
+            get { return GetValue<string>(); }
             set
             {
-                _team.Name= value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
     }

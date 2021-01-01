@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <converters:EnumBooleanConverter x:Key="enumBooleanConverter"></converters:EnumBooleanConverter>
     </UserControl.Resources>
-    <GroupBox Header="{Binding ViewModelHeader, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 0 10">
+    <GroupBox Header="{Binding ViewModelHeader, UpdateSourceTrigger=PropertyChanged}" Margin="10 10 10 10" FontSize="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -27,11 +27,11 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="FirstName" Margin="10 10 10 0"></Label>
-            <TextBox Grid.Row="1" Text="{Binding EmployeeWrapper.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"></TextBox>
+            <TextBox Grid.Row="1" Text="{Binding EmployeeWrapper.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="10 0 10 10"></TextBox>
             <Label Grid.Row="2" Content="LastName"  Margin="10 10 10 0"></Label>
-            <TextBox Grid.Row="3" Text="{Binding EmployeeWrapper.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"></TextBox>
+            <TextBox Grid.Row="3" Text="{Binding EmployeeWrapper.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="10 0 10 10"></TextBox>
             <Label Grid.Row="4" Content="Date Of Birth"  Margin="10 10 10 0"></Label>
-            <DatePicker Grid.Row="5" SelectedDate="{Binding EmployeeWrapper.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"></DatePicker>
+            <DatePicker Grid.Row="5" SelectedDate="{Binding EmployeeWrapper.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="10 0 10 10"></DatePicker>
             <Label Grid.Row="6" Content="Gender"  Margin="10 10 10 0"></Label>
             <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="10 0 0 0">
                 <RadioButton IsChecked="{Binding EmployeeWrapper.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Male}" Margin="0 0 10 0">Male</RadioButton>
@@ -41,6 +41,7 @@
             <Label Grid.Row="8" Content="Job Title"  Margin="10 10 10 0"></Label>
             <ComboBox Grid.Row="9" ItemsSource="{Binding EmployeeTypes}" DisplayMemberPath="JobTitle" 
                       Margin="10 10 10 0"
+                      FontSize="20"
                       SelectedValuePath="Id" SelectedValue="{Binding EmployeeWrapper.EmployeeTypeId, Mode=TwoWay}"></ComboBox>
 
             <StackPanel Grid.Row="11" Orientation="Horizontal">

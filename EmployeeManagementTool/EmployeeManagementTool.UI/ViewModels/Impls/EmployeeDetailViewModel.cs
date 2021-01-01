@@ -97,6 +97,8 @@ namespace EmployeeManagementTool.ViewModels.Impls
                     $"{displayMemberToBeDeleted} is about to be deleted from the database. Are you sure you want to continue?", "Confirm Deletion");
             if(userChoice == MessageDialogResult.Cancel)
                 return;
+            EmployeeWrapper.PropertyChanged -= EmployeeWrapper_OnPropertyChanged;
+            EmployeeWrapper.ErrorsChanged -= EmployeeWrapper_OnErrorChanged;
             _employeeAccessor.Remove(_employee);
             await _employeeAccessor.SaveChangesAsync();
             _detailViewModelDeletedEvent.RaiseDetailViewModelDeletedEvent(new DetailViewModelDeleteEventArgs()
@@ -109,7 +111,7 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         private bool OnSaveCanExecute()
         {
-            return HasChanges;
+            return EmployeeWrapper!=null && HasChanges && !EmployeeWrapper.HasErrors;
         }
 
         private async void OnSaveExecute(object obj)
@@ -127,16 +129,29 @@ namespace EmployeeManagementTool.ViewModels.Impls
 
         public async Task LoadAsync(int id)
         {
+            if (EmployeeWrapper != null)
+            {
+                EmployeeWrapper.PropertyChanged -= EmployeeWrapper_OnPropertyChanged;
+                EmployeeWrapper.ErrorsChanged -= EmployeeWrapper_OnErrorChanged;
+            }
+
             _employee = id > 0 ? await _employeeAccessor.GetEntityByIdAsync(id) : CreateNewEmployee();
             var employeeWrapper = new EmployeeWrapper(_employee);
             EmployeeWrapper = employeeWrapper;
             employeeWrapper.PropertyChanged += EmployeeWrapper_OnPropertyChanged;
+            employeeWrapper.ErrorsChanged += EmployeeWrapper_OnErrorChanged;
             await LoadEmployeeTypes();
+        }
+
+        private void EmployeeWrapper_OnErrorChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            ((ButtonCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         private Employee CreateNewEmployee()
         {
             Employee employee = new Employee();
+            employee.FirstName = string.Empty;
             _employeeAccessor.Add(employee);
             return employee;
         }

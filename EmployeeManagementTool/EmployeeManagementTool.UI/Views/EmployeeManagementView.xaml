@@ -48,20 +48,44 @@
                                     Message="{Binding MainLoadingMessage}" SubMessage="{Binding SubMessage}">
 
         </externalViews:LoadingPanel>
-        <Grid Grid.Row="2" Column="1" Margin="0 0 5 5">
-            <Button HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center" Command="{Binding GoHomeCommand}">
+        <Grid Grid.Row="2" Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"  HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" 
+                    Command="{Binding CreateNewItem}" Margin="10 0 0 5">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Run Text="&#xE80F;"
-                         FontFamily="Segoe MDL2 Assets"
-                         FontSize="25"/>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0">
+                        <Run Text="&#xE710;"
+                             FontFamily="Segoe MDL2 Assets"
+                             FontSize="25"/>
                     </TextBlock>
 
-                    <TextBlock Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <TextBlock Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                        <Run Text="Create New Employee"
+                             FontSize="15"/>
+                    </TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Column="1"  HorizontalAlignment="Right" Width="Auto" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" 
+                    Command="{Binding GoHomeCommand}" Margin="0 0 10 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0 0 10 0">
+                        <Run Text="&#xE80F;"
+                             FontFamily="Segoe MDL2 Assets"
+                             FontSize="25"/>
+                    </TextBlock>
+
+                    <TextBlock Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                         <Run Text="Home"
                              FontSize="15"/>
                     </TextBlock>

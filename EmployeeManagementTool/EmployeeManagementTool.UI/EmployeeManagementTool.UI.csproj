@@ -133,6 +133,7 @@
     <Compile Include="ModelWrappers\EmployeeTypeWrapper.cs" />
     <Compile Include="ModelWrappers\EmployeeWrapper.cs" />
     <Compile Include="ModelWrappers\TeamWrapper.cs" />
+    <Compile Include="ModelWrappers\WrapperBase.cs" />
     <Compile Include="ViewModels\Contracts\IDetailViewModel.cs" />
     <Compile Include="ViewModels\Contracts\IMainWindowViewModel.cs" />
     <Compile Include="ViewModels\Contracts\INavigationViewModel.cs" />

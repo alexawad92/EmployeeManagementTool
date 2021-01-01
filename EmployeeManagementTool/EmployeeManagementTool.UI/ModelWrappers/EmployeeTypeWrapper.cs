@@ -10,27 +10,24 @@ using EmployeeManagementTool.ViewModels.Impls;
 
 namespace EmployeeManagementTool.ModelWrappers
 {
-    public class EmployeeTypeWrapper : ViewModelBase
+    public class EmployeeTypeWrapper : WrapperBase<EmployeeType>
     {
-        private readonly EmployeeType _employeeType;
 
-        public EmployeeTypeWrapper(EmployeeType employeeType)
+        public EmployeeTypeWrapper(EmployeeType employeeType):base(employeeType)
         {
-            _employeeType = employeeType;
         }
 
         public int Id
         {
-            get { return _employeeType.Id; }
+            get { return Model.Id; }
         }
 
         public string JobTitle
         {
-            get { return _employeeType.JobTitle; }
+            get { return GetValue<string>(); }
             set
             {
-                _employeeType.JobTitle = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
     }
